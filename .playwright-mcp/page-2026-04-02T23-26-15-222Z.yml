@@ -1,0 +1,45 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e8]:
+      - link "PROFILE" [ref=e9] [cursor=pointer]:
+        - /url: /?section=hero
+        - generic [ref=e11]: PROFILE
+      - link "PROJECTS" [ref=e13] [cursor=pointer]:
+        - /url: /?section=projects
+        - generic [ref=e15]: PROJECTS
+      - link "EXPERIENCES" [ref=e16] [cursor=pointer]:
+        - /url: /?section=experiences
+        - generic [ref=e18]: EXPERIENCES
+    - generic [ref=e22]:
+      - generic [ref=e25]: Data Scientist & ML Engineer
+      - heading "PORTOFOLIO" [level=2] [ref=e26]
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - heading "Pande Gede Dani Wismagatha, S.Kom" [level=1] [ref=e30]
+          - paragraph [ref=e32]: Data Scientist dengan pengalaman 2+ tahun di AI dan Machine Learning. Melalui 900+ jam pelatihan intensif (Bangkit Academy & Microsoft), saya membangun model prediktif untuk solusi berbasis data yang inovatif.
+          - generic [ref=e33]:
+            - generic [ref=e34]: Python
+            - generic [ref=e35]: Machine Learning
+            - generic [ref=e36]: Data Analytics
+            - generic [ref=e37]: SQL
+          - generic [ref=e38]:
+            - button "More About Me" [ref=e39]:
+              - generic [ref=e40]: More About Me
+              - img [ref=e41]
+            - generic [ref=e44]:
+              - link "LinkedIn" [ref=e45] [cursor=pointer]:
+                - /url: https://linkedin.com/in/pande-dani
+                - img [ref=e46]
+              - link "GitHub" [ref=e48] [cursor=pointer]:
+                - /url: https://github.com/pande-dani
+                - img [ref=e49]
+              - link "Email" [ref=e51] [cursor=pointer]:
+                - /url: mailto:pandegede.dani@gmail.com
+                - img [ref=e52]
+        - generic [ref=e55]:
+          - img "Pande Gede Dani Wismagatha" [ref=e59]
+          - generic [ref=e63]: AI & ML
+          - generic [ref=e64]: Data Science
+  - button "Open Next.js Dev Tools" [ref=e70] [cursor=pointer]:
+    - img [ref=e71]
+  - alert [ref=e74]

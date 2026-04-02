@@ -1,26 +1,377 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Softer, darker color palette - slate and warm tones */
+  --background: #0c0c0c;
+  --foreground: #e8e6e3;
+  --foreground-muted: #a09c97;
+  
+  /* Softer accent - warm amber/bronze instead of blue-purple */
+  --accent: #d4a574;
+  --accent-hover: #e8b888;
+  --accent-subtle: rgba(212, 165, 116, 0.15);
+  --accent-glow: rgba(212, 165, 116, 0.2);
+  
+  /* Card colors - warm dark slate */
+  --card-bg: #151515;
+  --card-bg-hover: #1a1a1a;
+  --card-border: #2a2a28;
+  --card-border-hover: #3a3a37;
+  
+  /* Section backgrounds */
+  --section-1: #0f0f0f;
+  --section-2: #111110;
+  --section-3: #121211;
+  
+  /* Gradient colors - subtle warm */
+  --gradient-1: #d4a574;
+  --gradient-2: #b8956e;
+  --gradient-3: #8b7355;
+  
+  /* Muted text */
+  --muted: #6b6560;
+  --muted-light: #8a837c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Hide scrollbar globally */
+html, body {
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODERN TECH GRADIENT BACKGROUND
+   ═══════════════════════════════════════════════════════════════ */
+.tech-gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #0c0c0c;
+}
+
+.tech-gradient-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(212, 165, 116, 0.04) 0%, transparent 40%);
+  animation: gradientFloat 20s ease-in-out infinite;
+}
+
+.tech-gradient-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(180deg, rgba(12, 12, 12, 0) 0%, rgba(12, 12, 12, 0.3) 50%, rgba(12, 12, 12, 0.5) 100%);
+}
+
+/* Subtle grid pattern overlay */
+.tech-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(212, 165, 116, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 165, 116, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+/* Dot matrix pattern for tech aesthetic */
+.dot-matrix {
+  background-image: radial-gradient(circle, rgba(212, 165, 116, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes gradientFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(2%, 2%) rotate(1deg);
+  }
+  50% {
+    transform: translate(0, 4%) rotate(0deg);
+  }
+  75% {
+    transform: translate(-2%, 2%) rotate(-1deg);
+  }
+}
+
+/* Tech glow orbs */
+.tech-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+.tech-glow-1 {
+  width: 400px;
+  height: 400px;
+  top: 10%;
+  left: -10%;
+  background: rgba(212, 165, 116, 0.15);
+}
+
+.tech-glow-2 {
+  width: 300px;
+  height: 300px;
+  bottom: 20%;
+  right: -5%;
+  background: rgba(139, 115, 85, 0.12);
+  animation-delay: -4s;
+}
+
+.tech-glow-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 40%;
+  background: rgba(212, 165, 116, 0.08);
+  animation-delay: -2s;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLASSMORPHISM & UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(21, 21, 21, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(21, 21, 21, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  from { 
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.1);
+  }
+  to { 
+    box-shadow: 0 0 30px rgba(212, 165, 116, 0.2);
+  }
+}
+
+/* Gradient text - warm amber/bronze */
+.gradient-text {
+  background: linear-gradient(135deg, #d4a574 0%, #b8956e 50%, #8b7355 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Utility for warm gradient borders */
+.warm-gradient-border {
+  position: relative;
+}
+
+.warm-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--accent), var(--gradient-3));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Timeline navigation pulse animation */
+@keyframes timelinePulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+.animate-timeline-pulse {
+  animation: timelinePulse 2s ease-in-out infinite;
+}
+
+/* Custom selection color */
+::selection {
+  background: var(--accent-subtle);
+  color: var(--foreground);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3D TILT EFFECT FOR HERO PHOTO
+   ═══════════════════════════════════════════════════════════════ */
+.tilt-container {
+  perspective: 1000px;
+}
+
+.tilt-element {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.tilt-element:hover {
+  transform: rotateY(var(--rotate-y, 0deg)) rotateX(var(--rotate-x, 0deg));
+}
+
+.tilt-element .tilt-front {
+  backface-visibility: hidden;
+}
+
+.tilt-element .tilt-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HORIZONTAL SCROLL POKER CARDS
+   ═══════════════════════════════════════════════════════════════ */
+.poker-card-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.poker-card-container::-webkit-scrollbar {
+  display: none;
+}
+
+.poker-card {
+  flex-shrink: 0;
+  transition: transform 0.3s ease, z-index 0s;
+  transform-origin: bottom center;
+}
+
+.poker-card:hover {
+  transform: translateY(-20px) scale(1.05);
+  z-index: 10;
+}
+
+.poker-card.active {
+  transform: translateY(-30px) scale(1.1);
+  z-index: 20;
+}
+
+/* Custom scrollbar for horizontal scroll */
+.poker-card-container {
+  scrollbar-color: var(--accent) var(--card-bg);
+}
+
+.poker-card-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.poker-card-container::-webkit-scrollbar-track {
+  background: var(--card-bg);
+  border-radius: 2px;
+}
+
+.poker-card-container::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 2px;
 }
