@@ -375,3 +375,5 @@ body::-webkit-scrollbar {
   background: var(--accent);
   border-radius: 2px;
 }
+/* Glass token integration – central design system for glass surfaces */
+@import "../.sisyphus/themes/glassy.tokens.css";
