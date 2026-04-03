@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 export default function Experiences() {
   const [hoveredExperienceId, setHoveredExperienceId] = useState(1);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
-  const scrollRef = useRef(null);
 
   const experiences = [
     {
@@ -81,17 +80,6 @@ export default function Experiences() {
   ];
 
   const currentExp = experiences.find(e => e.id === hoveredExperienceId);
-
-  const handleScroll = (direction) => {
-    if (!scrollRef.current || !currentExp) return;
-    
-    const scrollAmount = 220;
-    if (direction === 'left') {
-      scrollRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="w-full min-h-screen py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 xl:px-24 relative overflow-hidden">
@@ -206,7 +194,7 @@ export default function Experiences() {
                   </div>
                 </div>
 
-                {/* Horizontal Scroll Poker Cards */}
+                {/* Image Slider */}
                 {currentExp.photos && currentExp.photos.length > 0 && (
                   <div className="relative">
                     {/* Section Label */}
@@ -218,86 +206,66 @@ export default function Experiences() {
                       <span className="text-xs text-[#6b6560]">({currentExp.photos.length})</span>
                     </div>
 
-                    {/* Scroll Buttons */}
-                    {currentExp.photos.length > 3 && (
+                    {/* Main Image Display */}
+                    <div className="relative rounded-2xl overflow-hidden glass-heavy aspect-[4/3] mb-4">
+                      <img 
+                        src={currentExp.photos[activePhotoIndex]} 
+                        alt={`${currentExp.company} photo ${activePhotoIndex + 1}`}
+                        className="w-full h-full object-cover transition-opacity duration-300"
+                      />
+                      {/* Image counter */}
+                      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full glass-light text-[10px] font-medium text-[#a09c97]">
+                        {activePhotoIndex + 1} / {currentExp.photos.length}
+                      </div>
+                    </div>
+
+                    {/* Navigation Arrows */}
+                    {currentExp.photos.length > 1 && (
                       <>
                         <button 
-                          onClick={() => handleScroll('left')}
-                          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:-translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full glass-light flex items-center justify-center transition-all group"
+                          onClick={() => setActivePhotoIndex(prev => prev === 0 ? currentExp.photos.length - 1 : prev - 1)}
+                          className="absolute left-2 top-[calc(50%-2rem)] -translate-y-1/2 z-10 w-9 h-9 rounded-full glass-light flex items-center justify-center transition-all hover:scale-105 group"
+                          aria-label="Previous photo"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b6560] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-4 h-4 text-[#a09c97] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
                         <button 
-                          onClick={() => handleScroll('right')}
-                          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 sm:translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full glass-light flex items-center justify-center transition-all group"
+                          onClick={() => setActivePhotoIndex(prev => prev === currentExp.photos.length - 1 ? 0 : prev + 1)}
+                          className="absolute right-2 top-[calc(50%-2rem)] -translate-y-1/2 z-10 w-9 h-9 rounded-full glass-light flex items-center justify-center transition-all hover:scale-105 group"
+                          aria-label="Next photo"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b6560] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-4 h-4 text-[#a09c97] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
                       </>
                     )}
 
-                    {/* Poker Cards Container */}
-                    <div 
-                      ref={scrollRef}
-                      className="poker-card-container flex gap-3 sm:gap-4 pb-2 overflow-x-auto"
-                      style={{ 
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                      }}
-                    >
-                      {currentExp.photos.map((photo, idx) => (
-                        <div 
-                          key={idx}
-                          className={`
-                            poker-card relative w-40 sm:w-48 h-52 sm:h-64 rounded-xl overflow-hidden 
-                            glass-light cursor-pointer flex-shrink-0
-                            transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#d4a574]/10
-                            ${activePhotoIndex === idx ? 'active ring-2 ring-[#d4a574]/50' : ''}
-                          `}
-                          onClick={() => setActivePhotoIndex(idx)}
-                          style={{
-                            transform: `rotate(${(idx - activePhotoIndex) * 2}deg)`,
-                            transformOrigin: 'bottom center',
-                          }}
-                        >
-                          {/* Card shadow/depth effect */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#d4a574]/5 to-transparent" />
-                          
-                          {/* Image */}
-                          <img 
-                            src={photo} 
-                            alt={`${currentExp.company} photo ${idx + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                          
-                          {/* Card number indicator */}
-                          <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0c0c0c]/80 border border-[#2a2a28] flex items-center justify-center">
-                            <span className="text-[9px] sm:text-[10px] font-medium text-[#a09c97]">{idx + 1}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Dot indicators */}
+                    {/* Thumbnail Strip */}
                     {currentExp.photos.length > 1 && (
-                      <div className="flex justify-center gap-2 mt-4">
-                        {currentExp.photos.map((_, idx) => (
+                      <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                        {currentExp.photos.map((photo, idx) => (
                           <button
                             key={idx}
                             onClick={() => setActivePhotoIndex(idx)}
                             className={`
-                              w-2 h-2 rounded-full transition-all duration-300
+                              flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden 
+                              border-2 transition-all duration-300
                               ${activePhotoIndex === idx 
-                                ? "bg-[#d4a574] w-6" 
-                                : "bg-[#2a2a28] hover:bg-[#3a3a37]"
+                                ? 'border-[#d4a574] shadow-lg shadow-[#d4a574]/20 scale-105' 
+                                : 'border-transparent opacity-60 hover:opacity-100 hover:border-[var(--glass-border)]'
                               }
                             `}
-                          />
+                          >
+                            <img 
+                              src={photo} 
+                              alt={`Thumbnail ${idx + 1}`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </button>
                         ))}
                       </div>
                     )}
