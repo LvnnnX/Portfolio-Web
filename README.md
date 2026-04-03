@@ -1,127 +1,185 @@
-# Portfolio Web
+# 🧑‍💻 Portfolio — Pande Gede Dani Wismagatha
 
-A personal portfolio built with Next.js and React. The site presents a polished profile page, selected projects, and experience highlights with a dark, modern visual style.
+A personal portfolio website for a Data Scientist & ML Engineer. Built with Next.js 16, React 19, and Tailwind CSS v4 — featuring a dark, warm aesthetic with amber accents, animated backgrounds, and smooth interactions.
 
-## Overview
+> 🌐 **Live Demo**: [Deployed on Vercel](https://portfolio-web-five-woad.vercel.app/?section=hero)
 
-This repository is organized as a small Next.js App Router project. The main landing page is composed from reusable React components, and the individual project pages are served through a dynamic route.
+---
 
-The design leans on a warm dark palette, animated background effects, and large typography to keep the experience focused on the content while still feeling visually distinctive.
+## ✨ Features
 
-## Tech Stack
+- **Section-based navigation** — Switch between Profile, Projects, and Experiences with URL-synced state
+- **3D tilt photo effect** — Interactive hero image that responds to mouse movement
+- **Vertical timeline nav** — Floating left-side navigation with active state indicators
+- **Poker card photo gallery** — Horizontal scrollable image cards in the Experiences section
+- **Dynamic project pages** — Each project has its own case-study detail page at `/project/[slug]`
+- **Fully responsive** — Desktop timeline nav + mobile bottom navigation
+- **Animated tech background** — Gradient orbs, grid overlay, and subtle motion effects
 
-- Next.js 16
-- React 19
-- Tailwind CSS via `@import "tailwindcss"`
-- ESLint with Next.js core web vitals rules
-- Google Fonts through `next/font`
+---
 
-## Project Structure
+## 🛠 Tech Stack
 
-```text
+| Layer | Technology |
+|---|---|
+| **Framework** | Next.js 16 (App Router) |
+| **UI Library** | React 19 |
+| **Styling** | Tailwind CSS v4 |
+| **Fonts** | Geist Sans + Geist Mono + Inter (via `next/font`) |
+| **Linting** | ESLint with `eslint-config-next` |
+| **Compiler** | React Compiler (Babel plugin) |
+
+---
+
+## 📁 Project Structure
+
+```
 .
-├── app/
-│   ├── globals.css
-│   ├── layout.js
-│   ├── page.js
+├── app/                          # Next.js App Router
+│   ├── globals.css               # Global styles, theme vars, animations
+│   ├── layout.js                 # Root layout + font + metadata setup
+│   ├── page.js                   # Main landing page (nav + sections)
 │   └── project/
 │       └── [slug]/
-│           └── page.js
-├── components/
-│   ├── Experiences.jsx
-│   ├── Hero.jsx
-│   └── Projects.jsx
-├── public/
+│           └── page.js           # Dynamic project detail pages
+│
+├── components/                   # Reusable React components
+│   ├── Experiences.jsx           # Career timeline + photo gallery
+│   ├── Hero.jsx                  # Profile intro + 3D tilt photo
+│   └── Projects.jsx              # Featured project cards grid
+│
+├── public/                       # Static assets
 │   └── images/
-│       ├── hero_img.jpg
-│       ├── 1.jpg
-│       ├── DSCF5041 copy.jpg
-│       ├── DSCF5073 copy.jpg
-│       ├── DSCF5142 copy.jpg
-│       ├── pr1-full.png
-│       ├── pr1-tb.png
-│       ├── pr2-full.png
-│       ├── pr2-tb.png
-│       ├── pr3-full.png
-│       ├── pr3-tb.png
-│       ├── work_1/
-│       ├── work_2/
-│       ├── work_3/
-│       ├── work_4/
-│       ├── work_5/
-│       ├── work_6/
-│       └── work_7/
-├── eslint.config.mjs
-├── jsconfig.json
-├── next.config.mjs
-├── package.json
-├── postcss.config.mjs
-└── README.md
+│       ├── hero_img.jpg          # Main profile photo
+│       ├── pr1-full.png          # Project preview images (full)
+│       ├── pr1-tb.png            # Project preview images (thumbnail)
+│       ├── work_1/ – work_7/     # Experience gallery photos
+│       └── *.jpg                 # Additional image assets
+│
+├── eslint.config.mjs             # ESLint configuration
+├── jsconfig.json                 # Path aliases (@/*)
+├── next.config.mjs               # Next.js config (React Compiler)
+├── package.json                  # Dependencies + scripts
+├── postcss.config.mjs            # Tailwind CSS PostCSS plugin
+└── README.md                     # You are here 📍
 ```
 
-## File Guide
+---
 
-### Root configuration files
+## 📄 File Guide
 
-- [package.json](package.json) defines the project metadata, dependencies, and scripts for development, building, starting, and linting.
-- [next.config.mjs](next.config.mjs) holds the Next.js configuration. This project enables the React Compiler here.
-- [eslint.config.mjs](eslint.config.mjs) configures ESLint with Next.js core web vitals rules and repository-specific ignores.
-- [jsconfig.json](jsconfig.json) sets the `@/*` path alias so imports can stay short and readable.
-- [postcss.config.mjs](postcss.config.mjs) enables the Tailwind CSS PostCSS plugin.
-- [README.md](README.md) is this project guide.
+### 🏗 App Directory — Pages & Layout
 
-### App directory
+| File | Purpose |
+|---|---|
+| **`app/layout.js`** | Root HTML structure. Sets up Google Fonts (Geist Sans, Geist Mono, Inter) as CSS variables, page metadata (title, description, Open Graph), and wraps all pages. |
+| **`app/globals.css`** | The design system. Contains CSS variables for colors, the animated tech gradient background, glassmorphism utilities, keyframe animations (fade-in, slide-up, glow, timeline pulse), 3D tilt styles, and poker card scroll behavior. |
+| **`app/page.js`** | The main landing page. Manages section state (`hero`, `projects`, `experiences`), renders the left-side vertical timeline navigation, mobile bottom nav, and composes the Hero, Projects, and Experiences components. |
+| **`app/project/[slug]/page.js`** | Dynamic route for individual project detail pages. Each project gets its own URL like `/project/fruit-ninja-bot`. |
 
-- [app/layout.js](app/layout.js) defines the root HTML structure, global metadata, and font setup for the site.
-- [app/globals.css](app/globals.css) contains global styles, theme variables, the animated background, utility classes, and shared motion rules.
-- [app/page.js](app/page.js) is the main landing page. It manages section navigation and composes the hero, projects, and experiences sections.
-- [app/project/[slug]/page.js](app/project/%5Bslug%5D/page.js) renders the dynamic project detail pages for each selected project.
+### 🧩 Components — UI Building Blocks
 
-### Components directory
+| File | Purpose |
+|---|---|
+| **`components/Hero.jsx`** | The introductory profile section. Contains the name/title, bio text, skill badges, social links (LinkedIn, GitHub), a "More About Me" CTA button, and the 3D tilt portrait photo with floating badges. |
+| **`components/Projects.jsx`** | The projects showcase. Features a scrolling marquee header, a 3-column responsive grid of project cards with hover overlays, and links to each project's detail page. |
+| **`components/Experiences.jsx`** | The career timeline. Left side lists all experiences as hoverable items; right side shows a sticky detail card with role, company, period, description, and skills. Below that is a horizontal "poker card" photo gallery for each experience. |
 
-- [components/Hero.jsx](components/Hero.jsx) renders the introductory profile section, skills badges, social links, and the tilted portrait card.
-- [components/Projects.jsx](components/Projects.jsx) shows the featured project cards and links each card to its dynamic detail page.
-- [components/Experiences.jsx](components/Experiences.jsx) displays the career timeline, experience details, and related photo gallery.
+### ⚙️ Configuration Files
 
-### Public assets
+| File | Purpose |
+|---|---|
+| **`package.json`** | Project metadata, dependency list, and scripts (`dev`, `build`, `start`, `lint`). |
+| **`next.config.mjs`** | Next.js configuration. Enables the React Compiler via Babel plugin for optimized renders. |
+| **`eslint.config.mjs`** | ESLint setup with Next.js core web vitals rules and repository-specific ignores. |
+| **`jsconfig.json`** | Configures the `@/*` path alias for cleaner imports. |
+| **`postcss.config.mjs`** | Enables `@tailwindcss/postcss` — the Tailwind CSS v4 PostCSS plugin. |
 
-- [public/images/hero_img.jpg](public/images/hero_img.jpg) is the main profile image used in the hero section.
-- [public/images/1.jpg](public/images/1.jpg) and the `DSCF*.jpg` files are additional image assets available for reuse.
-- [public/images/pr1-full.png](public/images/pr1-full.png), [public/images/pr2-full.png](public/images/pr2-full.png), and [public/images/pr3-full.png](public/images/pr3-full.png) are the large preview images for the featured projects.
-- [public/images/pr1-tb.png](public/images/pr1-tb.png), [public/images/pr2-tb.png](public/images/pr2-tb.png), and [public/images/pr3-tb.png](public/images/pr3-tb.png) are thumbnail versions of those project visuals.
-- [public/images/work_1/](public/images/work_1), [public/images/work_2/](public/images/work_2), [public/images/work_3/](public/images/work_3), [public/images/work_4/](public/images/work_4), [public/images/work_5/](public/images/work_5), [public/images/work_6/](public/images/work_6), and [public/images/work_7/](public/images/work_7) store supporting images for the experience timeline.
+### 🖼 Public Assets
 
-## Getting Started
+| Path | Contents |
+|---|---|
+| **`public/images/hero_img.jpg`** | Main profile photo displayed in the Hero section. |
+| **`public/images/pr*-full.png`** | Full-size preview images for featured projects. |
+| **`public/images/pr*-tb.png`** | Thumbnail versions of project previews. |
+| **`public/images/work_1/` – `work_7/`** | Photo galleries for each experience entry in the timeline. |
+| **`public/images/*.jpg`** | Additional general-purpose image assets. |
 
-Install dependencies and start the development server:
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** 18+ installed
+- **npm** (comes with Node.js)
+
+### Quick Start
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Start the development server
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser. The app hot-reloads as you edit files.
 
-## Available Scripts
+### Available Scripts
 
-- `npm run dev` starts the development server.
-- `npm run build` creates a production build.
-- `npm run start` runs the production server after a build.
-- `npm run lint` checks the code with ESLint.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Create a production-optimized build |
+| `npm run start` | Run the production server (after build) |
+| `npm run lint` | Run ESLint to check code quality |
 
-## How The Site Is Organized
+---
 
-- The homepage uses a section-based layout with Hero, Projects, and Experiences content.
-- The Projects section links to dynamic routes under `/project/[slug]` for full case-study style pages.
-- Images and static media live in `public/images` so they can be referenced directly from the app.
-- Shared visual styling and motion behavior are centralized in [app/globals.css](app/globals.css).
+## 🎨 Design System
 
-## Notes
+The portfolio uses a cohesive dark theme with warm tones:
 
-- The repository uses a dark, warm palette with amber accents for a cohesive portfolio look.
-- Fonts are loaded through `next/font` and exposed as CSS variables in the root layout.
-- The app is designed to be responsive, with different navigation patterns for desktop and mobile.
+| Token | Value | Usage |
+|---|---|---|
+| Background | `#0c0c0c` | Page background |
+| Foreground | `#e8e6e3` | Primary text |
+| Accent | `#d4a574` | Amber — buttons, active states, highlights |
+| Card BG | `#151515` | Card surfaces |
+| Card Border | `#2a2a28` | Subtle card borders |
+| Muted Text | `#6b6560` | Secondary/descriptive text |
 
-## Learn More
+All colors are defined as CSS custom properties in `app/globals.css` for easy theming.
 
-If you want to extend this project, the best starting points are the main landing page in [app/page.js](app/page.js), the reusable UI in [components/](components), and the shared styles in [app/globals.css](app/globals.css).
+---
+
+## 🏗 How It Works
+
+1. **Section Navigation** — The homepage uses URL query params (`?section=hero`) to track the active section. Clicking a nav dot updates the URL and swaps the visible component.
+2. **Desktop Nav** — A floating vertical timeline on the left with dot indicators, active segment lines, and labels.
+3. **Mobile Nav** — A fixed bottom bar with dot indicators for touch-friendly navigation.
+4. **Project Pages** — Each project card links to `/project/[slug]`, a dynamic route that renders a full case-study page.
+5. **Styling** — Tailwind CSS v4 with custom utilities in `globals.css` for animations, glassmorphism, and the tech gradient background.
+
+---
+
+## 📝 Notes
+
+- Fonts are loaded via `next/font` — no external requests, no layout shift.
+- The app is fully responsive with breakpoints for mobile, tablet, and desktop.
+- The React Compiler is enabled for automatic render optimization.
+- Images in `public/` are served statically and referenced directly.
+
+---
+
+## 📚 Want to Extend This Project?
+
+Good starting points:
+- **Add a new section** → Create a component in `components/`, import it in `app/page.js`, and add a nav item.
+- **Add a new project** → Add an entry to the `projectList` array in `components/Projects.jsx` and create a matching detail page.
+- **Change the theme** → Edit the CSS variables in `app/globals.css`.
+- **Add a new experience** → Add an entry to the `experiences` array in `components/Experiences.jsx`.
+
+---
+
