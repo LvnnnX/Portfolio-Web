@@ -31,6 +31,44 @@
   /* Muted text */
   --muted: #6b6560;
   --muted-light: #8a837c;
+
+  /* GLASSMORPHISM DESIGN TOKENS
+     ═══════════════════════════════════════════════════════════════ */
+  /* Glass surface base - translucent with warm tint */
+  --glass-bg: rgba(21, 21, 21, 0.65);
+  --glass-bg-heavy: rgba(15, 15, 15, 0.85);
+  --glass-bg-light: rgba(30, 30, 30, 0.45);
+  --glass-bg-hover: rgba(26, 26, 26, 0.75);
+
+  /* Glass blur intensity */
+  --glass-blur-sm: 8px;
+  --glass-blur-md: 12px;
+  --glass-blur-lg: 16px;
+  --glass-blur-xl: 20px;
+
+  /* Glass borders - subtle light refraction effect */
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.1);
+  --glass-border-accent: rgba(212, 165, 116, 0.15);
+
+  /* Glass inner glow for depth */
+  --glass-inner-glow: rgba(255, 255, 255, 0.03);
+  --glass-inner-glow-accent: rgba(212, 165, 116, 0.05);
+
+  /* Glass shadows for elevation */
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --glass-shadow-accent: 0 8px 32px rgba(212, 165, 116, 0.08);
+
+  /* Glass surface gradients */
+  --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  --glass-gradient-warm: linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, rgba(212, 165, 116, 0) 100%);
+
+  /* Glass radius */
+  --glass-radius-sm: 12px;
+  --glass-radius-md: 16px;
+  --glass-radius-lg: 20px;
+  --glass-radius-xl: 24px;
 }
 
 @theme inline {
@@ -175,19 +213,150 @@ body::-webkit-scrollbar {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GLASSMORPHISM & UTILITIES
+   GLASSMORPHISM UTILITIES
    ═══════════════════════════════════════════════════════════════ */
+/* Primary glass surface - frosted glass effect */
 .glass {
-  background: rgba(21, 21, 21, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
 }
 
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-gradient);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Heavy glass - for overlays and modals */
+.glass-heavy {
+  background: var(--glass-bg-heavy);
+  backdrop-filter: blur(var(--glass-blur-lg));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/* Light glass - for subtle surfaces like tags and badges */
+.glass-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-sm);
+}
+
+/* Glass card - for content cards with warm gradient */
 .glass-card {
-  background: linear-gradient(145deg, rgba(21, 21, 21, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(145deg, var(--glass-bg) 0%, var(--glass-bg-heavy) 100%);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-gradient-warm);
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-accent);
+  transform: translateY(-2px);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+/* Glass button */
+.glass-btn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  color: var(--foreground);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.glass-btn:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-accent);
+}
+
+/* Glass nav - for navigation bars */
+.glass-nav {
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(var(--glass-blur-xl));
+  -webkit-backdrop-filter: blur(var(--glass-blur-xl));
+  border: 1px solid var(--glass-border);
+}
+
+/* Glass input */
+.glass-input {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius-sm);
+  color: var(--foreground);
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  border-color: var(--glass-border-accent);
+  box-shadow: 0 0 0 2px var(--accent-subtle);
+  outline: none;
+}
+
+/* Glass shimmer animation for loading states */
+@keyframes glassShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.glass-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--glass-bg) 25%,
+    var(--glass-bg-light) 50%,
+    var(--glass-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: glassShimmer 2s ease-in-out infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .glass-card,
+  .glass-btn,
+  .glass-shimmer {
+    transition: none;
+    animation: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -375,5 +544,4 @@ body::-webkit-scrollbar {
   background: var(--accent);
   border-radius: 2px;
 }
-/* Glass token integration – central design system for glass surfaces */
-@import "../.sisyphus/themes/glassy.tokens.css";
+

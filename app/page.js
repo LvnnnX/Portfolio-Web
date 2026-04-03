@@ -129,7 +129,7 @@ export default function Home() {
       </nav>
 
       {/* Mobile bottom nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 flex flex-row items-center justify-around h-14 border-t border-[#2a2a28] bg-[#0c0c0c]/95 backdrop-blur-xl z-50 safe-area-bottom">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 flex flex-row items-center justify-around h-14 border-t border-[#2a2a28] glass-nav z-50 safe-area-bottom">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
           return (

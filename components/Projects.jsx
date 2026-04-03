@@ -86,7 +86,7 @@ export default function Projects() {
               {/* Card */}
               <div className={`
                 relative h-64 sm:h-72 md:h-80 rounded-2xl overflow-hidden 
-                bg-[#151515] border border-[#2a2a28] backdrop-blur-sm 
+                glass-card 
                 transition-all duration-500 
                 group-hover:border-[#3a3a37] group-hover:shadow-xl group-hover:shadow-[#d4a574]/5
                 ${hoveredProject === project.id ? 'translate-y-[-4px]' : ''}

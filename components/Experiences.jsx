@@ -128,8 +128,8 @@ export default function Experiences() {
                 className={`
                   relative group p-4 rounded-xl cursor-pointer transition-all duration-300 border
                   ${hoveredExperienceId === exp.id 
-                    ? "bg-[#1a1a1a] border-[#3a3a37] shadow-lg shadow-[#d4a574]/5" 
-                    : "bg-[#151515] border-[#2a2a28] hover:bg-[#1a1a1a] hover:border-[#3a3a37]"
+                    ? "glass border-[var(--glass-border-accent)] shadow-lg shadow-[#d4a574]/5" 
+                    : "glass-light hover:bg-[var(--glass-bg-hover)]"
                   }
                 `}
               >
@@ -161,7 +161,7 @@ export default function Experiences() {
             {currentExp && (
               <div className="sticky top-8 space-y-6">
                 {/* Detail Card */}
-                <div className="relative p-5 sm:p-6 rounded-2xl bg-[#151515] border border-[#2a2a28] backdrop-blur-sm overflow-hidden">
+                <div className="relative p-5 sm:p-6 rounded-2xl glass-card overflow-hidden">
                   {/* Glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#d4a574]/5 to-[#8b7355]/5 rounded-2xl pointer-events-none" />
                   
@@ -197,7 +197,7 @@ export default function Experiences() {
                       {currentExp.skills.map((skill, idx) => (
                         <span 
                           key={idx}
-                          className="px-3 py-1 rounded-full text-xs font-medium bg-[#1a1a1a] text-[#8a837c] border border-[#2a2a28] whitespace-nowrap"
+                          className="px-3 py-1 rounded-full text-xs font-medium glass-light whitespace-nowrap"
                         >
                           {skill}
                         </span>
@@ -223,7 +223,7 @@ export default function Experiences() {
                       <>
                         <button 
                           onClick={() => handleScroll('left')}
-                          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:-translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#151515] border border-[#2a2a28] flex items-center justify-center hover:bg-[#1a1a1a] hover:border-[#3a3a37] transition-all group"
+                          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:-translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full glass-light flex items-center justify-center transition-all group"
                         >
                           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b6560] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -231,7 +231,7 @@ export default function Experiences() {
                         </button>
                         <button 
                           onClick={() => handleScroll('right')}
-                          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 sm:translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#151515] border border-[#2a2a28] flex items-center justify-center hover:bg-[#1a1a1a] hover:border-[#3a3a37] transition-all group"
+                          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 sm:translate-x-2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full glass-light flex items-center justify-center transition-all group"
                         >
                           <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#6b6560] group-hover:text-[#d4a574] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -254,7 +254,7 @@ export default function Experiences() {
                           key={idx}
                           className={`
                             poker-card relative w-40 sm:w-48 h-52 sm:h-64 rounded-xl overflow-hidden 
-                            bg-[#151515] border border-[#2a2a28] cursor-pointer flex-shrink-0
+                            glass-light cursor-pointer flex-shrink-0
                             transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#d4a574]/10
                             ${activePhotoIndex === idx ? 'active ring-2 ring-[#d4a574]/50' : ''}
                           `}
